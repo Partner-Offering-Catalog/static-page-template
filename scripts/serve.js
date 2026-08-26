@@ -24,7 +24,14 @@ if (!fs.existsSync(ROOT)) {
 }
 
 const server = http.createServer((req, res) => {
-  let requestPath = decodeURIComponent(req.url.split('?')[0]);
+let requestPath;
+  try {
+    requestPath = decodeURIComponent(req.url.split('?')[0]);
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('Bad request');
+    return;
+  }
   if (requestPath.endsWith('/')) {
     requestPath += 'index.html';
   }
