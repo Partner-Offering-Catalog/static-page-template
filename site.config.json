@@ -1,0 +1,27 @@
+{
+  "title": "Static Page Template",
+  "baseUrl": "/",
+  "languageCode": "en-us",
+  "brand": "Partner Offering Catalog",
+  "description": "A clean template for static documentation sites.",
+  "repositoryLabel": "Source",
+  "repositoryUrl": "https://github.com/Partner-Offering-Catalog/static-page-template",
+  "footerNote": "Published with GitHub Pages.",
+  "heroStats": [
+    {
+      "label": "Navigation",
+      "value": "Collapsible",
+      "caption": "Tree menu generated from content folders"
+    },
+    {
+      "label": "Design",
+      "value": "Fluent",
+      "caption": "Microsoft-inspired look and feel"
+    },
+    {
+      "label": "Publishing",
+      "value": "Static",
+      "caption": "Optimized for GitHub Pages"
+    }
+  ]
+}

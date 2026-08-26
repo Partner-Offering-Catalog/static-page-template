@@ -1,17 +1,17 @@
-+++
-title = 'Folder Structure'
-description = 'Recommended repository layout for content-driven navigation.'
-weight = 10
-+++
+---
+title: Folder Structure
+description: Recommended repository layout for content-driven navigation.
+weight: 10
+---
 
-The left navigation follows the structure under `content/`. Keep `_index.md` files at each folder level to provide clear titles and descriptions for section pages.
+The left navigation follows the structure under `content/`. Keep a `README.md` file at each folder level to provide the clear title, description, and content shown when that folder's navigation entry is selected.
 
 Use front matter like this:
 
-```toml
-+++
-title = 'My Page'
-description = 'A short summary shown in page cards.'
-weight = 10
-+++
+```yaml
+---
+title: My Page
+description: A short summary shown in page cards.
+weight: 10
+---
 ```
