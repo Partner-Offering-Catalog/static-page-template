@@ -1,19 +1,19 @@
-+++
-title = 'Overview'
-description = 'Understand how pages and sections become navigation entries.'
-weight = 10
-+++
+---
+title: Overview
+description: Understand how folders and pages become navigation entries.
+weight: 10
+---
 
-Hugo treats folders with `_index.md` files as sections. The sidebar template recursively walks those sections and pages, so nested folders become nested navigation.
+Folders with a `README.md` file become navigation entries. The sidebar recursively walks those folders and pages, so nested folders become nested, collapsible navigation, and each entry always links to its folder's `README.md`.
 
 ```text
 content/
   getting-started/
-    _index.md
+    README.md
     overview.md
   reference/
-    _index.md
+    README.md
     architecture/
-      _index.md
+      README.md
       folder-structure.md
 ```
