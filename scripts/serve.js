@@ -30,7 +30,8 @@ const server = http.createServer((req, res) => {
   }
 
   let filePath = path.join(ROOT, requestPath);
-  if (!filePath.startsWith(ROOT)) {
+  const relativePath = path.relative(ROOT, filePath);
+  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
     res.writeHead(403);
     res.end('Forbidden');
     return;
