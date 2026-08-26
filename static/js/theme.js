@@ -26,8 +26,6 @@
     } catch (error) {}
   }
 
-  setTheme(currentTheme());
-
   if (toggle) {
     toggle.addEventListener('click', function () {
       setTheme(currentTheme() === 'dark' ? 'light' : 'dark');

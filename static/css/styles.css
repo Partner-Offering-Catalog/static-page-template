@@ -13,6 +13,8 @@
   --border: #d9e1ec;
   --border-strong: #c5cfdd;
   --header-bg: rgba(255, 255, 255, 0.92);
+  --code-bg: #0f1724;
+  --code-fg: #e6edf7;
   --shadow: 0 18px 50px rgba(23, 32, 51, 0.12);
   --focus: #ffb900;
   color-scheme: light;
@@ -33,6 +35,8 @@
   --border: #2d3b50;
   --border-strong: #41506a;
   --header-bg: rgba(15, 23, 36, 0.9);
+  --code-bg: #0b1220;
+  --code-fg: #e6edf7;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
   color-scheme: dark;
 }
@@ -465,8 +469,8 @@ a:hover {
   overflow: auto;
   border: 1px solid var(--border);
   border-radius: 0.9rem;
-  background: #0f1724;
-  color: #e6edf7;
+  background: var(--code-bg);
+  color: var(--code-fg);
   padding: 1rem;
 }
 
