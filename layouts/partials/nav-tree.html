@@ -5,7 +5,7 @@
     {{ range $pages.ByWeight }}
       {{ $children := union .Sections .RegularPages }}
       {{ $isCurrent := eq .RelPermalink $current.RelPermalink }}
-      {{ $isAncestor := and (ne .RelPermalink site.Home.RelPermalink) (hasPrefix $current.RelPermalink .RelPermalink) }}
+      {{ $isAncestor := and (ne .RelPermalink site.Home.RelPermalink) (.IsAncestor $current) }}
       {{ $classes := slice }}
       {{ if $isCurrent }}{{ $classes = $classes | append "is-current" }}{{ end }}
       {{ if and (not $isCurrent) $isAncestor }}{{ $classes = $classes | append "is-ancestor" }}{{ end }}
