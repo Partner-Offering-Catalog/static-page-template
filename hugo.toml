@@ -6,9 +6,6 @@ disableKinds = ['taxonomy', 'term']
 enableGitInfo = true
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
   [markup.highlight]
     noClasses = false
 
