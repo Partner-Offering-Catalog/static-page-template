@@ -47,7 +47,14 @@ function build() {
   }
 
   const root = buildContentTree(CONTENT_DIR);
-  const pages = flattenTree(root);
+const pages = flattenTree(root);
+  const seenUrlPaths = new Set();
+  for (const { node } of pages) {
+    if (seenUrlPaths.has(node.urlPath)) {
+      throw new Error(`Multiple content entries resolve to ${node.urlPath}`);
+    }
+    seenUrlPaths.add(node.urlPath);
+  }
 
   for (const { node, ancestors } of pages) {
     const contentHtml = marked.parse(node.body);
