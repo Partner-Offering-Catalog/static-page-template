@@ -1,5 +1,5 @@
 (function () {
-  var key = 'static-page-template-theme';
+  var key = document.documentElement.dataset.themeStorageKey || 'static-page-template-theme';
   var toggle = document.querySelector('[data-theme-toggle]');
 
   function currentTheme() {

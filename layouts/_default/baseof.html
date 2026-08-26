@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.LanguageCode | default "en" }}">
+<html lang="{{ site.LanguageCode | default "en" }}" data-theme-storage-key="static-page-template-theme">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
     <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
     <script>
       (function () {
-        var key = 'static-page-template-theme';
+        var key = document.documentElement.dataset.themeStorageKey || 'static-page-template-theme';
         var theme = 'light';
         try {
           theme = localStorage.getItem(key) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');

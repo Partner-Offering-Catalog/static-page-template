@@ -3,5 +3,5 @@
     <p class="eyebrow">Navigation</p>
     <h2>Contents</h2>
   </div>
-  {{ partial "nav-tree.html" (dict "pages" site.Home.Pages "current" .) }}
+  {{ partial "nav-tree.html" (dict "pages" (union site.Home.Sections site.Home.RegularPages) "current" .) }}
 </div>
