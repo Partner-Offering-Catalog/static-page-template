@@ -15,8 +15,26 @@ const CONFIG_PATH = path.join(ROOT_DIR, 'site.config.json');
 
 marked.setOptions({ gfm: true, breaks: false });
 
+/**
+ * Normalizes a deployment base path into a leading-slash, no-trailing-slash
+ * prefix (`/` becomes an empty prefix). GitHub Pages project sites are served
+ * from `/<repository>/`, so the base path must be prepended to every generated
+ * URL for that deployment.
+ * @param {string} value
+ * @returns {string}
+ */
+function normalizeBaseUrl(value) {
+  const trimmed = String(value ?? '').trim();
+  if (!trimmed || trimmed === '/') {
+    return '/';
+  }
+  return `/${trimmed.replace(/^\/+/, '').replace(/\/+$/, '')}`;
+}
+
 function loadConfig() {
-  return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  const baseUrl = process.env.BASE_URL ?? config.baseUrl;
+  return { ...config, baseUrl: normalizeBaseUrl(baseUrl) };
 }
 
 function copyRecursive(source, destination) {

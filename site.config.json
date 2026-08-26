@@ -1,5 +1,6 @@
 {
   "title": "Static Page Template",
+  "baseUrl": "/",
   "languageCode": "en-us",
   "brand": "Partner Offering Catalog",
   "description": "A clean template for static documentation sites.",

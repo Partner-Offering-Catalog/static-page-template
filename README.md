@@ -77,9 +77,33 @@ footer note, and hero summary cards:
 ```json
 {
   "title": "My Static Site",
+  "baseUrl": "/",
   "brand": "My Team",
   "description": "Static documentation for my repository.",
   "repositoryLabel": "Source",
   "repositoryUrl": "https://github.com/example/repository"
 }
 ```
+
+## Deployment base path
+
+Every generated link and asset URL is prefixed with `baseUrl`. Keep it as `/`
+for local previews and for user or organization sites served from the domain
+root. A GitHub Pages *project* site is served from `/<repository>/`, so set the
+base path for that deployment, either in `site.config.json`:
+
+```json
+{
+  "baseUrl": "/static-page-template/"
+}
+```
+
+or by deriving it during deployment with the `BASE_URL` environment variable,
+which overrides the configured value:
+
+```bash
+BASE_URL="/${GITHUB_REPOSITORY#*/}/" npm run build
+```
+
+Leaving the base path at `/` for a project site makes assets and navigation
+links resolve at the account root and return 404.
