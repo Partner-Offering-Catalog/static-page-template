@@ -2,8 +2,8 @@
 {{ $current := .current }}
 {{ if gt (len $pages) 0 }}
   <ul class="nav-tree">
-    {{ range $pages.ByWeight }}
-      {{ $children := union .Sections .RegularPages }}
+    {{ range $pages }}
+      {{ $children := .Pages.ByWeight }}
       {{ $isCurrent := eq .RelPermalink $current.RelPermalink }}
       {{ $isAncestor := and (ne .RelPermalink site.Home.RelPermalink) (.IsAncestor $current) }}
       {{ $classes := slice }}
