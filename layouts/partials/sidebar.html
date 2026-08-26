@@ -1,0 +1,7 @@
+<div class="sidebar-inner">
+  <div class="sidebar-heading">
+    <p class="eyebrow">Navigation</p>
+    <h2>Contents</h2>
+  </div>
+  {{ partial "nav-tree.html" (dict "pages" site.Home.Pages.ByWeight "current" .) }}
+</div>

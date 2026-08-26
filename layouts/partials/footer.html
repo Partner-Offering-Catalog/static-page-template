@@ -1,0 +1,16 @@
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="ms-logo" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span>
+        <strong>{{ site.Params.brand | default site.Title }}</strong>
+        <small>{{ site.Params.footerNote }}</small>
+      </span>
+    </div>
+    {{ with site.Params.repositoryUrl }}
+      <a href="{{ . }}" rel="noopener noreferrer" target="_blank">{{ site.Params.repositoryLabel | default "Source" }}</a>
+    {{ end }}
+  </div>
+</footer>

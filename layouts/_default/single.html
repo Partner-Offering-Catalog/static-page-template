@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="content-card">
+    <header class="content-header">
+      <p class="eyebrow">Documentation</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    </header>
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

@@ -1,0 +1,22 @@
+<header class="topbar">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="topbar-inner">
+    <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Params.brand | default site.Title }}, back to home">
+      <span class="ms-logo" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span class="brand-copy">
+        <strong>{{ site.Params.brand | default site.Title }}</strong>
+        <small>{{ site.Params.description }}</small>
+      </span>
+    </a>
+    <div class="topbar-actions">
+      {{ with site.Params.repositoryUrl }}
+        <a class="source-button" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ site.Params.repositoryLabel | default "Source" }}</a>
+      {{ end }}
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,47 @@
+{{ define "main" }}
+  <section class="hero" id="top">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow">{{ site.Params.brand }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </div>
+    {{ with site.Params.heroStats }}
+      <div class="hero-summary" aria-label="Site highlights">
+        {{ range $index, $stat := . }}
+          <div class="summary-card{{ if eq $index 0 }} summary-card-primary{{ end }}">
+            <span>{{ $stat.label }}</span>
+            <strong>{{ $stat.value }}</strong>
+            <small>{{ $stat.caption }}</small>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+
+  <article class="content-card">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+
+  {{ if .Pages }}
+    <section class="section-grid" aria-labelledby="site-sections-heading">
+      <div class="section-heading">
+        <p class="eyebrow">Folder structure</p>
+        <h2 id="site-sections-heading">Browse the site</h2>
+      </div>
+      <div class="card-grid">
+        {{ range .Pages.ByWeight }}
+          <a class="page-card" href="{{ .RelPermalink }}">
+            <span>{{ if .IsSection }}Folder{{ else }}Page{{ end }}</span>
+            <strong>{{ .LinkTitle }}</strong>
+            {{ with .Description }}<small>{{ . }}</small>{{ end }}
+          </a>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
