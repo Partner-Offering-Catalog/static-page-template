@@ -1,0 +1,18 @@
+{{ $pages := .pages }}
+{{ $current := .current }}
+{{ if gt (len $pages) 0 }}
+  <ul class="nav-tree">
+    {{ range $pages.ByWeight }}
+      {{ $isCurrent := eq .RelPermalink $current.RelPermalink }}
+      {{ $isAncestor := and (ne .RelPermalink site.Home.RelPermalink) (hasPrefix $current.RelPermalink .RelPermalink) }}
+      <li class="{{ if $isCurrent }}is-current{{ end }}{{ if and (not $isCurrent) $isAncestor }} is-ancestor{{ end }}{{ if .Pages }} has-children{{ end }}">
+        <a href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+          <span>{{ .LinkTitle }}</span>
+        </a>
+        {{ with .Pages }}
+          {{ partial "nav-tree.html" (dict "pages" . "current" $current) }}
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}
