@@ -3,8 +3,7 @@
 A Hugo template for rendering clean, professional static pages from Markdown content
 without adding presentation clutter to consuming repositories.
 
-The template is inspired by the Microsoft-style look and feel used in
-[`NikoMix/ms-accreditation-overview`](https://github.com/NikoMix/ms-accreditation-overview):
+The template is inspired by the Microsoft-style look and feel 
 it uses a Segoe UI font stack, Fluent blue accents, a polished hero area, card
 surfaces, a Microsoft tile mark, and light/dark theme support.
 
