@@ -12,7 +12,7 @@
     </a>
     <div class="topbar-actions">
       {{ with site.Params.repositoryUrl }}
-        <a class="source-button" href="{{ . }}" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="source-button" href="{{ . }}" target="_blank" rel="noreferrer">{{ site.Params.repositoryLabel | default "Source" }}</a>
       {{ end }}
       <button class="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
         <span aria-hidden="true">◐</span>

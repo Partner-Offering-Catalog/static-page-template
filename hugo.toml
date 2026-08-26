@@ -12,6 +12,7 @@ enableGitInfo = true
 [params]
   brand = 'Partner Offering Catalog'
   description = 'A clean Hugo template for static documentation sites.'
+  repositoryLabel = 'Source'
   repositoryUrl = 'https://github.com/Partner-Offering-Catalog/static-page-template'
   footerNote = 'Built with Hugo for GitHub Pages.'
 

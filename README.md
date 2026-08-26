@@ -74,5 +74,6 @@ title = 'My Static Site'
 [params]
   brand = 'My Team'
   description = 'Static documentation for my repository.'
+  repositoryLabel = 'Source'
   repositoryUrl = 'https://github.com/example/repository'
 ```

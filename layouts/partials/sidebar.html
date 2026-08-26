@@ -3,5 +3,6 @@
     <p class="eyebrow">Navigation</p>
     <h2>Contents</h2>
   </div>
-  {{ partial "nav-tree.html" (dict "pages" (union site.Home.Sections site.Home.RegularPages) "current" .) }}
+  {{ $navigationPages := union site.Home.Sections site.Home.RegularPages }}
+  {{ partial "nav-tree.html" (dict "pages" $navigationPages.ByWeight "current" .) }}
 </div>
