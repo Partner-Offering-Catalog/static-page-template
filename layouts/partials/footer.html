@@ -10,7 +10,7 @@
       </span>
     </div>
     {{ with site.Params.repositoryUrl }}
-      <a href="{{ . }}" rel="noreferrer" target="_blank">{{ site.Params.repositoryLabel | default "Source" }}</a>
+      <a href="{{ . }}" rel="noopener noreferrer" target="_blank">{{ site.Params.repositoryLabel | default "Source" }}</a>
     {{ end }}
   </div>
 </footer>
