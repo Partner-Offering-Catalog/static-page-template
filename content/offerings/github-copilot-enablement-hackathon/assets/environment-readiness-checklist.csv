@@ -1,0 +1,17 @@
+Track,Item,Owner,Start,Due,Blocking
+Environment,Request trial or golden-ticket organization,Delivery lead,T-30d,T-21d,Yes
+Environment,Confirm licence position for every participant,Platform owner,T-30d,T-21d,Yes
+Environment,Assign Copilot seats to named individuals,Platform owner,T-21d,T-14d,Yes
+Environment,Verify each seat resolves to an attending person,Delivery lead,T-14d,T-7d,Yes
+Environment,Confirm push access to the working repository,Platform owner,T-21d,T-14d,Yes
+Environment,Confirm participants can open a pull request,Platform owner,T-14d,T-7d,Yes
+Environment,Check network and proxy access from the delivery location,Delivery lead,T-14d,T-7d,Yes
+Environment,Confirm branch protection allows the planned workflow,Platform owner,T-14d,T-7d,No
+Environment,Write the deprovisioning plan and name its owner,Platform owner,T-21d,T-14d,No
+Participant,Send joining instructions and pre-work,Delivery lead,T-14d,T-14d,Yes
+Participant,Capture baseline values for every charter measure,Delivery lead,T-14d,T-7d,Yes
+Participant,Confirm pre-work completed,Delivery lead,T-7d,T-3d,No
+Participant,Chase unconfirmed participants individually,Delivery lead,T-7d,T-3d,No
+Readiness,Dry run on the real environment with a participant account,Delivery lead,T-7d,T-3d,Yes
+Readiness,Confirm reviewer availability for each delivery day,Engineering lead,T-7d,T-3d,Yes
+Readiness,Record the go or no-go decision,Delivery lead,T-3d,T-3d,Yes
