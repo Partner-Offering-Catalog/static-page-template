@@ -17,6 +17,8 @@ Microsoft tile mark, and light/dark theme support.
 - Breadcrumbs and section cards for easy exploration.
 - Responsive layout that keeps the sidebar readable on desktop and stacks it on
   smaller screens.
+- An offering catalog: every offering is described against a shared delivery
+  framework and rendered as a timeline, with a build-generated overview table.
 - No client-side JavaScript framework required.
 
 ## Content structure
@@ -50,6 +52,70 @@ description: Recommended repository layout for content-driven navigation.
 weight: 10
 ---
 ```
+
+Front matter values are flat `key: value` pairs. A value written as a YAML flow
+sequence, such as `audience: [Partner developers, Customer developers]`, is
+parsed as a list; quote an item that contains a comma.
+
+A folder named `assets/` is not scanned for pages, so it needs no `README.md`.
+Its files are copied to the published site as-is, which is where decks,
+spreadsheets, and images belong. Relative links to other Markdown pages and to
+files under `assets/` are rewritten to their published URLs at build time, but
+only when the target file exists, so a typo stays visibly broken instead of
+becoming a plausible wrong URL.
+
+## Offerings
+
+Each folder under `content/offerings/` is an offering: a hackathon, training,
+workshop, or similar engagement. Its `README.md` describes the engagement
+against a shared eight-stage delivery framework, from first conversation to
+realized value.
+
+```text
+content/offerings/
+  README.md                     the catalog page
+  framework.md                  the eight stages, in detail
+  authoring.md                  how to write an offering
+  offering-template/            copy this to start a new offering
+  github-copilot-enablement-hackathon/
+    README.md
+    joining-instructions.md
+    assets/
+      environment-readiness-checklist.csv
+```
+
+Stages are declared as `###` headings under a single `## Delivery framework`
+heading, with bold-label fields beneath each one:
+
+```markdown
+## Delivery framework
+
+### Discover & Qualify
+
+- **Timing:** T-90d → T-45d
+- **Owner:** Partner Development Manager
+- **Purpose:** Establish that this engagement is the right answer.
+```
+
+An offering declares only the stages it uses. A declared stage with no content
+renders as "not yet documented" and a stage marked
+`- **Status:** Not applicable` renders as such, so a reader can tell the
+difference between an engagement that skips a stage deliberately and one
+nobody has written up yet.
+
+The build fails on an unknown stage heading, an unknown field name, an
+unparseable timing anchor, a duplicate stage, or an unknown resource audience,
+so the timeline can never silently lose a stage to a typo. The template folder
+is validated on every run for the same reason.
+
+Two comment markers are replaced with generated HTML at build time:
+`<!-- offering-catalog -->` in `content/offerings/README.md` becomes the
+overview table of every offering, and `<!-- framework-stages -->` in
+`content/offerings/framework.md` becomes the stage reference table. Both are
+derived from the offerings themselves, so neither can drift.
+
+Offering pages render as readable Markdown on GitHub and as a timeline on the
+generated site; see `content/offerings/authoring.md` for the full contract.
 
 ## Local development
 

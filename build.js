@@ -202,6 +202,7 @@ function build() {
 
   for (const { node, ancestors } of pages) {
     const offering = offerings.byUrlPath.get(node.urlPath);
+    const isCatalog = node.urlPath === OFFERINGS_URL_PATH;
 
     setLinkContext({
       sourceDir: path.posix.dirname(node.contentPath),
@@ -217,7 +218,7 @@ function build() {
       contentHtml = contentHtml.split(FRAMEWORK_MARKER).join(frameworkHtml);
     }
 
-    if (node.urlPath === OFFERINGS_URL_PATH) {
+    if (isCatalog) {
       contentHtml = contentHtml.includes(CATALOG_MARKER)
         ? contentHtml.split(CATALOG_MARKER).join(catalogHtml)
         : `${contentHtml}${catalogHtml}`;
@@ -230,6 +231,7 @@ function build() {
       ancestors,
       contentHtml,
       isOffering: Boolean(offering),
+      isWide: isCatalog,
     });
 
     const outFile = path.join(OUTPUT_DIR, node.outFile);
