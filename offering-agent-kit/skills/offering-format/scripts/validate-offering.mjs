@@ -385,7 +385,7 @@ export function validateOffering(raw, filePath = 'README.md') {
   if (frameworkIndex === -1) {
     add('framework/missing', null, `no "## ${FRAMEWORK_HEADING}" heading, so the page renders no timeline`,
       `Add a "## ${FRAMEWORK_HEADING}" heading and declare the stages beneath it as "###" headings.`);
-    checkPlaceholders(fm.body, isTemplate, add);
+    checkPlaceholders(fm, isTemplate, add);
     return { findings, isTemplate, stages: [] };
   }
 
@@ -488,7 +488,7 @@ export function validateOffering(raw, filePath = 'README.md') {
     }
   }
 
-  checkPlaceholders(fm.body, isTemplate, add);
+  checkPlaceholders(fm, isTemplate, add);
   return { findings, isTemplate, stages };
 }
 
@@ -615,10 +615,22 @@ function validateResources(stage, section, add) {
 }
 
 /** Placeholder text is expected in the template and is a defect anywhere else. */
-function checkPlaceholders(bodyLines, isTemplate, add) {
+function checkPlaceholders(fm, isTemplate, add) {
   if (isTemplate) return;
+
+  // Front matter first: these values render straight into the catalog table, so
+  // a placeholder here is more visible than one in the body.
+  for (const [key, raw] of Object.entries(fm.rawValues ?? {})) {
+    const hit = PLACEHOLDER.exec(String(raw));
+    if (hit) {
+      add('content/placeholder', fm.lineOf?.[key] ?? null,
+        `placeholder text "${hit[0]}" is still in front matter field "${key}"`,
+        'Replace it with real content before publishing.');
+    }
+  }
+
   let fence = null;
-  for (const { text, n } of bodyLines.map((text, i) => ({ text, n: i + 1 }))) {
+  for (const { text, n } of fm.body.map((text, i) => ({ text, n: fm.bodyOffset + i + 1 }))) {
     const fenceMatch = /^ {0,3}(`{3,}|~{3,})/.exec(text);
     if (fenceMatch) {
       const marker = fenceMatch[1][0];

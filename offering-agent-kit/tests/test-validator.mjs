@@ -110,6 +110,34 @@ if (uncovered.length) {
   passed += 1;
 }
 
+// Firing on the right rule is only half of it: a finding that points at the
+// wrong line is not actionable. Front matter and body are numbered by different
+// paths, so both are pinned here against lines counted from the file itself.
+{
+  const marked = GOOD
+    .replace(/^status: .*$/m, 'status: Draft')
+    .replace(/^owner: .*$/m, 'owner: Replace me')
+    .replace(/^## Delivery framework$/m, 'Replace me.\n\n## Delivery framework');
+  const lines = marked.split('\n');
+  const expected = lines
+    .map((text, i) => (/Replace me/.test(text) ? i + 1 : null))
+    .filter((n) => n !== null);
+  const actual = validateOffering(marked, 'README.md').findings
+    .filter((f) => f.rule === 'content/placeholder')
+    .map((f) => f.line);
+
+  const same = expected.length > 0
+    && expected.length === actual.length
+    && expected.every((n, i) => n === actual[i]);
+  if (same) {
+    process.stdout.write(`pass  findings report true line numbers (${actual.join(', ')})\n`);
+    passed += 1;
+  } else {
+    process.stdout.write(`FAIL  line numbers wrong: expected ${expected.join(', ')} got ${actual.join(', ') || '(none)'}\n`);
+    failed += 1;
+  }
+}
+
 const compareIndex = process.argv.indexOf('--compare');
 if (compareIndex !== -1) {
   const libPath = process.argv[compareIndex + 1];
