@@ -24,7 +24,7 @@ content/offerings/
 ```yaml
 ---
 title: GitHub Copilot Enablement Hackathon
-description: One sentence, shown in the catalog table and in page cards.
+description: One sentence, shown on the catalog card and in page cards.
 weight: 10
 type: Hackathon
 audience: [Partner developers, Engineering leads]
@@ -38,12 +38,12 @@ tags: [GitHub Copilot, Developer productivity]
 ```
 
 `title`, `description`, and `weight` drive navigation and ordering, as they do for any page.
-The remaining fields populate the offering header and the catalog table. Multi-value fields
+The remaining fields populate the offering header, the catalog card, and the catalog filters. Multi-value fields
 use a YAML flow sequence (`[one, two]`), which keeps the front matter valid YAML for anything
 else that reads it.
 
 `status` is free text. The one value the build treats specially is `Template`: an offering
-with that status is a scaffold, so it is kept out of the catalog table while still being
+with that status is a scaffold, so it is kept out of the catalog listing while still being
 validated on every build.
 
 ## Stage blocks
