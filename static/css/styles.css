@@ -956,7 +956,7 @@ video {
 }
 
 .facet-label:hover {
-  background: var(--surface-alt);
+  background: var(--surface-soft);
   color: var(--brand-hover);
 }
 
