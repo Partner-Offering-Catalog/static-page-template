@@ -5,9 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
 const { buildContentTree, flattenTree } = require('./lib/content-tree');
-const { renderPage, renderOffering, renderCatalogTable, renderFrameworkTable } = require('./lib/templates');
+const { renderPage, renderOffering, renderCatalog, renderFrameworkTable } = require('./lib/templates');
 const { parseOffering, toCatalogEntry, isTemplateEntry } = require('./lib/offerings');
 const { setLinkContext, contentLinkExtension } = require('./lib/links');
+const { responsiveTableExtension } = require('./lib/tables');
 
 const ROOT_DIR = __dirname;
 const CONTENT_DIR = path.join(ROOT_DIR, 'content');
@@ -21,6 +22,7 @@ const FRAMEWORK_MARKER = '<!-- framework-stages -->';
 
 marked.setOptions({ gfm: true, breaks: false });
 marked.use(contentLinkExtension);
+marked.use(responsiveTableExtension);
 
 /**
  * Lists every file under `content/` as a posix path relative to that folder,
@@ -196,7 +198,7 @@ function build() {
   }
 
   const offerings = collectOfferings(root);
-  const catalogHtml = renderCatalogTable(offerings.entries, config.baseUrl);
+  const catalogHtml = renderCatalog(offerings.entries, config.baseUrl);
   const frameworkHtml = renderFrameworkTable();
   const contentFiles = listContentFiles(CONTENT_DIR);
 
