@@ -20,6 +20,7 @@
   --on-brand: #ffffff;
   --success: #0b6a0b;
   --alert: #a4262c;
+  --shell-gutter: clamp(0.75rem, 2vw, 2.5rem);
   color-scheme: light;
 }
 
@@ -99,9 +100,8 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  width: min(1200px, calc(100% - 2rem));
-  margin: 0 auto;
-  padding: 0.85rem 0;
+  width: 100%;
+  padding: 0.85rem var(--shell-gutter);
 }
 
 .skip-link {
@@ -206,9 +206,8 @@ a:hover {
   display: grid;
   grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr);
   gap: 1.5rem;
-  width: min(1200px, calc(100% - 2rem));
-  margin: 0 auto;
-  padding: 1.5rem 0 3rem;
+  width: 100%;
+  padding: 1.5rem var(--shell-gutter) 3rem;
 }
 
 .sidebar {
@@ -474,7 +473,7 @@ a:hover {
 }
 
 .prose {
-  max-width: 72ch;
+  max-width: none;
 }
 
 .prose :where(h2, h3, h4) {
@@ -577,12 +576,6 @@ a:hover {
   .brand-copy small,
   .source-button {
     display: none;
-  }
-
-  .topbar-inner,
-  .footer-inner,
-  .content-shell {
-    width: min(100% - 1rem, 1200px);
   }
 }
 
