@@ -177,7 +177,9 @@ function build() {
   const config = loadConfig();
 
   if (!fs.existsSync(path.join(CONTENT_DIR, 'README.md'))) {
-    throw new Error('content/README.md is required as the site home page.');
+    throw new Error(
+      'content/README.md is required as the site home page. The repository using this template provides the content/ folder.',
+    );
   }
 
   fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
