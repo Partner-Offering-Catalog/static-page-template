@@ -1584,20 +1584,10 @@ video {
   font-weight: 600;
 }
 
-.stage-badge-active {
+.stage-badge-represented {
   border-color: var(--brand);
   background: var(--brand);
   color: var(--on-brand);
-}
-
-.stage-badge-empty {
-  border-color: var(--border);
-  background: var(--surface-soft);
-  color: var(--muted);
-}
-
-.stage-badge-not-applicable {
-  border-style: dashed;
 }
 
 .stage-badge-absent {
@@ -1721,6 +1711,12 @@ video {
     grid-template-columns: minmax(6.5rem, 9rem) 2.25rem minmax(0, 1fr);
     grid-template-areas: 'opposite separator content';
     column-gap: 1.1rem;
+  }
+
+  /* An offering that sets no timing at all gets no rail to reserve space for. */
+  .timeline-unanchored .timeline-item {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    grid-template-areas: 'separator content';
   }
 
   .timeline-opposite {

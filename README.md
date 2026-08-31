@@ -17,15 +17,17 @@ Microsoft tile mark, and light/dark theme support.
 - Breadcrumbs and section cards for easy exploration.
 - Responsive layout that keeps the sidebar readable on desktop and stacks it on
   smaller screens.
-- An offering catalog: every offering is described against a shared delivery
-  framework and rendered as a timeline, with a build-generated overview table.
+- An offering catalog: every offering is described against a shared five-stage
+  delivery framework and rendered as a timeline, with a build-generated browse
+  page — keyword search, facets, and a card per offering.
 - No client-side JavaScript framework required.
 
 ## Content structure
 
-Create folders under `content/` and add a `README.md` file to each one for
-navigation entries. Any other Markdown file in a folder becomes a regular
-page. A `weight` value in front matter controls ordering.
+This repository ships the generator, not the content. The repository using the
+template provides `content/`: create folders under it and add a `README.md`
+file to each one for navigation entries. Any other Markdown file in a folder
+becomes a regular page. A `weight` value in front matter controls ordering.
 
 ```text
 content/
@@ -39,6 +41,9 @@ content/
       README.md
       folder-structure.md
 ```
+
+`content/README.md` is the site home page and is required; the build fails
+without it.
 
 Every folder's `README.md` is always the page shown when its navigation entry
 is selected, so the menu never points to an empty or auto-generated page.
@@ -68,21 +73,32 @@ becoming a plausible wrong URL.
 
 Each folder under `content/offerings/` is an offering: a hackathon, training,
 workshop, or similar engagement. Its `README.md` describes the engagement
-against a shared eight-stage delivery framework, from first conversation to
+against a shared five-stage delivery framework, from first conversation to
 realized value.
 
 ```text
 content/offerings/
-  README.md                     the catalog page
-  framework.md                  the eight stages, in detail
-  authoring.md                  how to write an offering
-  offering-template/            copy this to start a new offering
-  github-copilot-enablement-hackathon/
-    README.md
-    joining-instructions.md
-    assets/
-      environment-readiness-checklist.csv
+  README.md                     the catalog page, holding <!-- offering-catalog -->
+  framework.md                  the framework page, holding <!-- framework-stages -->
+  my-offering/
+    README.md                   the offering
+    assets/                     decks, PDFs, spreadsheets, images
 ```
+
+The stages, in the order they must appear:
+
+| # | Stage | Core |
+| --- | --- | --- |
+| 1 | Engage | Core |
+| 2 | Scope | Optional |
+| 3 | Prepare | Core |
+| 4 | Execute | Core |
+| 5 | Wrap | Core |
+
+The framework names the stages and nothing else. Timing is the offering's own:
+each stage's `Timing` field sets the anchor shown on that offering's timeline,
+and a stage without one simply shows no anchor. There is no framework default,
+so the timeline never displays a date range nobody chose.
 
 Stages are declared as `###` headings under a single `## Delivery framework`
 heading, with bold-label fields beneath each one:
@@ -90,32 +106,48 @@ heading, with bold-label fields beneath each one:
 ```markdown
 ## Delivery framework
 
-### Discover & Qualify
+### Engage
 
-- **Timing:** T-90d → T-45d
+- **Timing:** T-90d → T-30d
 - **Owner:** Partner Development Manager
-- **Purpose:** Establish that this engagement is the right answer.
+- **Purpose:** Establish that this engagement is the right answer, and turn
+  interest into named participants and locked dates.
 ```
 
-An offering declares only the stages it uses. A declared stage with no content
-renders as "not yet documented" and a stage marked
+The fields are `Timing`, `Owner`, `Purpose`, and `Status`. A stage may then use
+the `####` subsections `Entry criteria`, `Activities`, `Outputs`,
+`Exit criteria`, and `Resources`. `Timing` uses a fixed vocabulary: `T-<n>d|w|m`
+before delivery, `D0`, `D+<n>` and `D+n` during it, `T+<n>d|w|m` after it,
+either alone or as a `from → to` range. A `Resources` table has the columns
+`Resource | Type | Audience | Link`, and `Audience` is one of `Internal`,
+`Partner`, `Customer`, `Participant`, or `Public`, so internal-only material
+stays recognisable where somebody is about to forward it.
+
+An offering declares only the stages it uses. On the offering page, a declared
+stage with no content renders as "not yet documented" and a stage marked
 `- **Status:** Not applicable` renders as such, so a reader can tell the
 difference between an engagement that skips a stage deliberately and one
-nobody has written up yet.
+nobody has written up yet. The catalog overview does not repeat that detail: it
+marks a stage as represented only when the offering wrote something under it,
+and leaves the reasons to the offering page.
 
 The build fails on an unknown stage heading, an unknown field name, an
 unparseable timing anchor, a duplicate stage, or an unknown resource audience,
-so the timeline can never silently lose a stage to a typo. The template folder
-is validated on every run for the same reason.
+so the timeline can never silently lose a stage to a typo. A heading from the
+earlier eight-stage framework — `Discover & Qualify`, `Engage & Commit`,
+`Scope & Design`, `Readiness / Go–No-Go`, `Wrap & Close-out`, or
+`Follow-up & Value realization` — fails with the stage that absorbed it named
+in the message.
 
 Two comment markers are replaced with generated HTML at build time:
-`<!-- offering-catalog -->` in `content/offerings/README.md` becomes the
-overview table of every offering, and `<!-- framework-stages -->` in
-`content/offerings/framework.md` becomes the stage reference table. Both are
-derived from the offerings themselves, so neither can drift.
+`<!-- offering-catalog -->` in `content/offerings/README.md` becomes the browse
+experience — keyword search, facets for type, level, audience, stage, and
+status, and a card per offering — and `<!-- framework-stages -->` becomes the
+stage reference table. Both are derived from the offerings themselves, so
+neither can drift.
 
 Offering pages render as readable Markdown on GitHub and as a timeline on the
-generated site; see `content/offerings/authoring.md` for the full contract.
+generated site.
 
 ## Local development
 
@@ -125,6 +157,11 @@ Install dependencies, then build the static site:
 npm install
 npm run build
 ```
+
+The build renders the `content/` folder of the repository using this template.
+Running it here, where there is no `content/`, fails with
+`content/README.md is required as the site home page`, which is the same
+message a consuming repository gets when its home page is missing.
 
 The generated output is written to `public/`, which is intentionally ignored
 by Git.
