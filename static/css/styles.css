@@ -1584,20 +1584,10 @@ video {
   font-weight: 600;
 }
 
-.stage-badge-active {
+.stage-badge-represented {
   border-color: var(--brand);
   background: var(--brand);
   color: var(--on-brand);
-}
-
-.stage-badge-empty {
-  border-color: var(--border);
-  background: var(--surface-soft);
-  color: var(--muted);
-}
-
-.stage-badge-not-applicable {
-  border-style: dashed;
 }
 
 .stage-badge-absent {

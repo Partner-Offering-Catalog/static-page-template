@@ -87,13 +87,18 @@ content/offerings/
 
 The stages, in the order they must appear:
 
-| # | Stage | Default anchor | Core |
-| --- | --- | --- | --- |
-| 1 | Engage | `T-90d → T-30d` | Core |
-| 2 | Scope | `T-30d → T-21d` | Optional |
-| 3 | Prepare | `T-30d → T-7d` | Core |
-| 4 | Execute | `T-7d → D+n` | Core |
-| 5 | Wrap | `D0 → T+90d` | Core |
+| # | Stage | Core |
+| --- | --- | --- |
+| 1 | Engage | Core |
+| 2 | Scope | Optional |
+| 3 | Prepare | Core |
+| 4 | Execute | Core |
+| 5 | Wrap | Core |
+
+The framework names the stages and nothing else. Timing is the offering's own:
+each stage's `Timing` field sets the anchor shown on that offering's timeline,
+and a stage without one simply shows no anchor. There is no framework default,
+so the timeline never displays a date range nobody chose.
 
 Stages are declared as `###` headings under a single `## Delivery framework`
 heading, with bold-label fields beneath each one:
@@ -118,11 +123,13 @@ either alone or as a `from → to` range. A `Resources` table has the columns
 `Partner`, `Customer`, `Participant`, or `Public`, so internal-only material
 stays recognisable where somebody is about to forward it.
 
-An offering declares only the stages it uses. A declared stage with no content
-renders as "not yet documented" and a stage marked
+An offering declares only the stages it uses. On the offering page, a declared
+stage with no content renders as "not yet documented" and a stage marked
 `- **Status:** Not applicable` renders as such, so a reader can tell the
 difference between an engagement that skips a stage deliberately and one
-nobody has written up yet.
+nobody has written up yet. The catalog overview does not repeat that detail: it
+marks a stage as represented only when the offering wrote something under it,
+and leaves the reasons to the offering page.
 
 The build fails on an unknown stage heading, an unknown field name, an
 unparseable timing anchor, a duplicate stage, or an unknown resource audience,
