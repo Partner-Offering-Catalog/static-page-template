@@ -1713,6 +1713,12 @@ video {
     column-gap: 1.1rem;
   }
 
+  /* An offering that sets no timing at all gets no rail to reserve space for. */
+  .timeline-unanchored .timeline-item {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    grid-template-areas: 'separator content';
+  }
+
   .timeline-opposite {
     padding-top: 0.35rem;
     padding-bottom: 0;
